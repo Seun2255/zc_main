@@ -1,9 +1,63 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from '../styles/Accessibility.module.css'
 import image1 from "../assets/images/up_icon.jpeg"
-
+import { GetUserInfo } from "../../../control/src/zuri-control"
+import checkFill from "../assets/images/check-fill.svg"
+import checkNotFill from "../assets/images/check-not-fill.svg"
+import radioFilled from "../assets/images/radio-fill.svg"
+import radioNotFilled from "../assets/images/radio-not-fill.svg"
 
 function Accessibility() {
+  // initialstate is the accessibilty settings from GetUserInfo
+  const [errorAccessibility, setErrorAccessibility] = useState()
+  const [accessbilitySettings, setAccessibilitySettings] = useState({
+    animation: true,
+    receivedSound: false,
+    sentSound: false,
+    readOutLoud: true,
+    messageControl: {
+      bool: true,
+      message: "focus_on_last_message"
+    }
+  })
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const userInfo = await GetUserInfo()
+        if (userInfo === {}) throw new Error("No user info")
+        const orgId = userInfo[0].org_id
+        const memId = userInfo[0]._id
+        const userAccessibiltySettings = {
+          links: true,
+          animation: accessbilitySettings.animation,
+          direct_message_announcement: {
+            receive_sound: accessbilitySettings.receivedSound,
+            send_sound: accessbilitySettings.sentSound,
+            read_message: accessbilitySettings.readOutLoud
+          },
+          press_empty_message_field: accessbilitySettings.messageControl.message
+        }
+        const userHeader = {
+          headers: {
+            Authorization: `Bearer ${userInfo.token}`
+          }
+        }
+        // dispatch(
+        //   setUserAccessibilitySettings(
+        //     `https://api.zuri.chat/organizations/${orgId}/members/${memId}/settings/accessibility`,
+        //     userAccessibiltySettings,
+        //     userHeader
+        //   )
+        // )
+        // dispatch(getUserInfo())
+      } catch (err) {
+        setErrorAccessibility(err)
+      }
+    });
+    return () => {}
+  }, [accessbilitySettings])
+
   return (
     <div>
       <div className={styles.containerAccessibility}>

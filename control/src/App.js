@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Login from './pages/login'
-import Uitest from './pages/UI/MsgBoard'
 import SignUp from './pages/signup'
 import SignOut from './pages/signout/index'
 import Workspace from './pages/workspace/components/Workspace'
@@ -50,11 +49,18 @@ import RedirectRoute from "./pages/redirect"
 import Plugins from "./pages/plugins"
 import Home from "./pages/admin/Settings/components/SettingsHome"
 import AboutWorkSpace from "./pages/admin/AboutWorkSpace"
-
+import AccountProfile from "./pages/admin/AccountProfile"
 import Legal from "./pages/legal"
 import ZurichatBlog from "./pages/blogs/components/zurichatBlog"
-
 import Ebooks from "./pages/ebooks"
+import Invitation from "./pages/admin/Invitation"
+import Whyzurichat from "./pages/WhyZuriChat/Whyzurichat"
+
+import OnboardingHelp from "./pages/LoginSignUpHelp/index"
+
+
+
+import ChangeWorkspaceName from "./pages/admin/Settings/components/ChangeWorkspaceName"
 
 // useEffect(() => {
 //     localStorage.setItem('input',input);
@@ -140,23 +146,24 @@ const App = () => {
         </Route>
         <Route path="/terms">
           <TermsOfService />
-          </Route>
+        </Route>
         <Route path="/legal">
           <Legal />
         </Route>
-
         <Route path="/privacy">
           <PrivacyPolicy />
         </Route>
-        <Route path="/uitest">
-          <Uitest />
-        </Route>
-        <Route path="/marketplace" exact>
+        <Route path="/open-marketplace" exact>
           <MarketPlace />
         </Route>
         <Route path="/dao-features">
           <DAO_Features />
         </Route>
+
+        <Route path="/troubleshooting/onboarding-help">
+          <OnboardingHelp />
+        </Route>
+
         {/* <Route path="/marketplace" exact>
           <MarketPlace />
         </Route> */}
@@ -166,6 +173,11 @@ const App = () => {
         <Route path="/ZurichatBlog">
           <ZurichatBlog />
         </Route>
+
+        <Route path="/whyzurichat">
+          <Whyzurichat />
+        </Route>
+
         {/* ----------------settings routes opened------------------------ */}
         <PrivateRoute
           path="/confirm-deactivation"
@@ -182,6 +194,7 @@ const App = () => {
         <PrivateRoute path="/settings" exact component={Settings} />
         <PrivateRoute path="/admin/settings" exact component={SettingsHome} />
         <PrivateRoute path="/admin/settings/home" exact component={Home} />
+        <PrivateRoute path="/admin/name" exact component={ChangeWorkspaceName} />
         <PrivateRoute
           path="/admin/settings/billings"
           exact
@@ -202,8 +215,12 @@ const App = () => {
           exact
           component={AdminSettingsTab}
         /> */}
+
         <PrivateRoute path="/settings/:id" component={ConfirmPassword} />
         {/* ----------------settings routes closed----------------- */}
+        <Route path="/invitation">
+          <Invitation />
+        </Route>
         <Route path="/reset-password">
           <ResetPassword />
         </Route>

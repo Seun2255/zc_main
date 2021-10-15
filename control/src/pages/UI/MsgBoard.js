@@ -1,8 +1,8 @@
 import {useState} from 'react'
 import avatar from "./profile.svg"
 import { ChatContainer } from "./MsgBoardStyle"
-import Input from '../../../../zuriUi/src/components/InputBox/Input'
-import PluginModal from '../../../../zuriUi/src/components/PluginModal/PluginModal'
+// import Input from "../../../../zuriUi/src/components/InputBox/Input"
+import PluginModal from "../../../../zuriUi/src/components/PluginModal/PluginModal"
 
 function Uitest() {
   const MsgList = [
@@ -88,13 +88,12 @@ const [message, setMessage] = useState('')
                 <div className="message">{item.message}</div>
               </div>
             </div>
-          ))}
-        </div>
-        <div className='input-text'>
-          <Input />
-        </div>
-      </ChatContainer>
-  
+        ))}
+      </div>
+      <div className="input-text">
+        {/* <Input /> */}
+      </div>
+    </ChatContainer>
   )
 }
 

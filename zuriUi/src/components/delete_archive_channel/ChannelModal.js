@@ -1,14 +1,12 @@
 import { useState } from 'react'
-// import { ProfileContext } from '../context/ProfileModal'
 import styles from './ChannelModal.module.css'
 
-const ChannelModal = ({ title, children, full }) => {
-//   const { modal, toggleModalState } = useContext(ProfileContext)
- const [modal, setModal] = useState(false)
+const ChannelModal = ({ title, children, full, closeEdit }) => {
+
+ const [modal, setModal] = useState(true)
  const toggleModalState = () => {
     setModal(!modal)
   }
-// const { modal, toggleModalState } = useContext
 
   const mql = window.matchMedia('(max-width: 640px)')
   let mobileView = mql.matches
